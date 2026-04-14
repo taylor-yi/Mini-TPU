@@ -1,5 +1,6 @@
 import struct
 import numpy as np
+import random
 
 def float_to_bf16_int(f_val):
     """
@@ -57,3 +58,40 @@ def hardware_mac(bf16_input_a, bf16_input_b, current_fp32_accumulator):
     new_accumulator = current_fp32_accumulator + product
     
     return new_accumulator
+
+
+# ---- Vector Text File Generation for SV Testing ---- #
+def generate_mul_vectors(num_vectors=100, filename="mul_vectors.txt"):
+    """
+    Generates random BF16 pairs and their expected product for SV testing.
+    """
+    print(f"Generating {num_vectors} test vectors into {filename}...")
+    
+    with open(filename, 'w') as f:
+        for _ in range(num_vectors): 
+            # '_' is a common convention for an incrementing variable we don't use
+
+            # 1. Generate two random floats (let's keep them between -10 and 10 for readability)
+            a_float = random.uniform(-10.0, 10.0)
+            b_float = random.uniform(-10.0, 10.0)
+            
+            # 2. Convert them to our hardware BF16 format
+            a_bf16 = float_to_bf16_int(a_float)
+            b_bf16 = float_to_bf16_int(b_float)
+            
+            # 3. Simulate hardware math (multiply the truncated values, not the pure floats!)
+            hw_a = bf16_int_to_float(a_bf16)
+            hw_b = bf16_int_to_float(b_bf16)
+            product_float = hw_a * hw_b
+            
+            # 4. Convert the final product back to BF16 format to check the output
+            product_bf16 = float_to_bf16_int(product_float)
+            
+            # 5. Write to file as 4-character Hex strings (e.g., "C000 4000 C000")
+            # Format: Input_A Input_B Expected_Product
+            f.write(f"{a_bf16:04X} {b_bf16:04X} {product_bf16:04X}\n")
+            
+    print("Done!")
+
+if __name__ == "__main__":
+    generate_mul_vectors(10)
