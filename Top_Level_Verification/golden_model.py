@@ -64,6 +64,8 @@ def hardware_mac(bf16_input_a, bf16_input_b, current_fp32_accumulator):
 def generate_mul_vectors(num_vectors=100, filename="mul_vectors.txt"):
     """
     Generates random BF16 pairs and their expected product for SV testing.
+    In format [input_a input_b expected_product] where each is a 4-character Hex string
+    representing the BF16 value.
     """
     print(f"Generating {num_vectors} test vectors into {filename}...")
     
