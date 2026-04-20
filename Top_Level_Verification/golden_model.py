@@ -61,7 +61,7 @@ def hardware_mac(bf16_input_a, bf16_input_b, current_fp32_accumulator):
 
 
 # ---- Vector Text File Generation for SV Testing ---- #
-def generate_mul_vectors(num_vectors=100, filename="mul_vectors.txt"):
+def generate_mul_vectors(num_vectors=100, filename="Top_Level_Verification/mul_vectors.txt"):
     """
     Generates random BF16 pairs and their expected product for SV testing.
     In format [input_a input_b expected_product] where each is a 4-character Hex string
