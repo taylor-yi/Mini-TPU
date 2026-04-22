@@ -20,18 +20,14 @@ module bf16_special_detection(num_input, infinity, NaN, zero);
 
 endmodule
 
-// --------------------------------------------------------
-// Utility 1: FP32 to BF16 Caster (with Round-to-Nearest-Even)
-// --------------------------------------------------------
-module fp32_to_bf16 (
+module fp32_to_bf16 (fp32_in, bf16_out);
     input  logic [31:0] fp32_in,
     output logic [15:0] bf16_out
-);
+
     logic [31:0] rounding_bias;
     logic [31:0] rounded_val;
 
-    // This is the exact hardware equivalent of the Python hack we wrote earlier.
-    // We add 0x7FFF plus the 16th bit (which will become our new Least Significant Bit)
+    // Add 0x7FFF plus the 16th bit (which will become our new LSB)
     assign rounding_bias = 32'h0000_7FFF + {31'b0, fp32_in[16]};
     
     // Add the bias to force the round up or round down
@@ -42,13 +38,9 @@ module fp32_to_bf16 (
     
 endmodule
 
-// --------------------------------------------------------
-// Utility 2: BF16 to FP32 Caster
-// --------------------------------------------------------
-module bf16_to_fp32 (
+module bf16_to_fp32 (bf16_in, fp32_out);
     input  logic [15:0] bf16_in,
     output logic [31:0] fp32_out
-);
     // This is the easiest logic in the entire project. 
     // We just take the 16 bits and concatenate 16 zeros onto the bottom.
     assign fp32_out = {bf16_in, 16'h0000};
