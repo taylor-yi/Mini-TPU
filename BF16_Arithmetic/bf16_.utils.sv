@@ -1,4 +1,4 @@
-module bf16_utils(num_input, infinity, NaN, zero);
+module bf16_special_detection(num_input, infinity, NaN, zero);
     input logic [15:0] num_input;
     output logic pos_infinity, neg_infinity, NaN, zero;
 
