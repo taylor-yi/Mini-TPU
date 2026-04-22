@@ -1,8 +1,8 @@
-module bf16_mul (
-    input  logic [15:0] a,
-    input  logic [15:0] b,
-    output logic [15:0] result
-);
+module bf16_mul (a, b, result);
+
+    input  logic [15:0] a;
+    input  logic [15:0] b;
+    output logic [15:0] result;
 
     // 1. Unpack: Extract sign, exponent, and mantissa for A and B
     logic sign_a, sign_b; // 0 is positive
