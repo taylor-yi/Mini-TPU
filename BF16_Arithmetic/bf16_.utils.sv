@@ -44,5 +44,5 @@ module bf16_to_fp32 (bf16_in, fp32_out);
     // This is the easiest logic in the entire project. 
     // We just take the 16 bits and concatenate 16 zeros onto the bottom.
     assign fp32_out = {bf16_in, 16'h0000};
-    
+
 endmodule

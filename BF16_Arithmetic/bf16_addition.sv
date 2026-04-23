@@ -4,8 +4,10 @@ module bf16_adder (a, b, result);
 
     logic sign_a, sign_b;
     logic [7:0] mantissa_a, mantissa_b;
-    logci [7:0] exp_a, exp_b;
+    logic [7:0] exp_a, exp_b;
 
     assign sign_a = a[15];
-    assign
+    assign sign_b = b[15];
+
+
 endmodule
