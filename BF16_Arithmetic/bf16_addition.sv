@@ -15,9 +15,6 @@ module bf16_add (a, b, result);
     assign mantissa_a = {1'b1, a[6:0]};
     assign mantissa_b = {1'b1, b[6:0]};
 
-    // --------------------------------------------------------
-    // 2. FIND THE LARGER NUMBER (To know who shifts)
-    // --------------------------------------------------------
     logic a_is_larger;
     logic [7:0] exp_large, exp_small;
     logic [7:0] mant_large_start, mant_small_start;
@@ -65,9 +62,6 @@ module bf16_add (a, b, result);
         end
     end
 
-    // --------------------------------------------------------
-    // 5. NORMALIZE
-    // --------------------------------------------------------
     logic [8:0] norm_mant;
     logic [7:0] norm_exp;
 
@@ -109,5 +103,7 @@ module bf16_add (a, b, result);
             norm_exp  = 8'd0;
         end
     end
+
+    assign result = {final_sign, norm_exp, norm_mant[6:0]};
 
 endmodule
