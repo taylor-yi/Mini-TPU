@@ -65,6 +65,49 @@ module bf16_add (a, b, result);
         end
     end
 
-    
+    // --------------------------------------------------------
+    // 5. NORMALIZE
+    // --------------------------------------------------------
+    logic [8:0] norm_mant;
+    logic [7:0] norm_exp;
+
+    always_comb begin
+        // Case A: Addition caused a carry-out (e.g. 1.xx + 1.xx = 10.xx)
+        if (mant_sum[8] == 1'b1) begin
+            norm_mant = mant_sum >> 1; // Shift right to fix
+            norm_exp  = exp_large + 1; // Increase exponent
+        end
+        // Case B: Subtraction caused leading zeros (e.g. 1.5 - 1.25 = 0.25)
+        // We must shift left until the leading bit is a 1 again.
+        else if (mant_sum[7] == 1'b1) begin
+            norm_mant = mant_sum;
+            norm_exp  = exp_large;
+        end else if (mant_sum[6] == 1'b1) begin
+            norm_mant = mant_sum << 1;
+            norm_exp  = exp_large - 1;
+        end else if (mant_sum[5] == 1'b1) begin
+            norm_mant = mant_sum << 2;
+            norm_exp  = exp_large - 2;
+        end else if (mant_sum[4] == 1'b1) begin
+            norm_mant = mant_sum << 3;
+            norm_exp  = exp_large - 3;
+        end else if (mant_sum[3] == 1'b1) begin
+            norm_mant = mant_sum << 4;
+            norm_exp  = exp_large - 4;
+        end else if (mant_sum[2] == 1'b1) begin
+            norm_mant = mant_sum << 5;
+            norm_exp  = exp_large - 5;
+        end else if (mant_sum[1] == 1'b1) begin
+            norm_mant = mant_sum << 6;
+            norm_exp  = exp_large - 6;
+        end else if (mant_sum[0] == 1'b1) begin
+            norm_mant = mant_sum << 7;
+            norm_exp  = exp_large - 7;
+        end else begin
+            // The result is exactly zero
+            norm_mant = 9'd0;
+            norm_exp  = 8'd0;
+        end
+    end
 
 endmodule
