@@ -44,4 +44,13 @@ module bf16_add (a, b, result);
         end
     end
 
+    logic [7:0] exp_diff;
+    logic [7:0] small_mant_moved;
+
+    assign exp_diff = exp_large - exp_small;
+
+    assign small_mant_moved = (exp_diff > 8) ? 8'd0 : (mant_small_start >> exp_diff);
+
+    
+
 endmodule
