@@ -22,4 +22,4 @@ This repository contains the SystemVerilog implementation and verification envir
 
 ## Team & Responsibilities
 * **Tyler Braham:** Python golden model, tbd.
-* **[Partner Name]:** tbd.
+* **Taylor Yi:** tbd.
