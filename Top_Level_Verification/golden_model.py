@@ -124,3 +124,4 @@ def generate_add_vectors(num_vectors=100, filename="Top_Level_Verification/add_v
 
 if __name__ == "__main__":
     generate_mul_vectors(10)
+    generate_add_vectors(10)
