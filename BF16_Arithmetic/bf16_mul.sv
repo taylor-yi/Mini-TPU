@@ -16,7 +16,7 @@ module bf16_mul (a, b, result);
     assign exponent_b = b[14:7];
 
     assign mantissa_a = a[6:0];
-    assign mantissa_b = b[6:0]
+    assign mantissa_b = b[6:0];
     
 
 
@@ -39,13 +39,13 @@ module bf16_mul (a, b, result);
     assign output_mant = temp_mantissa_a * temp_mantissa_b;
     
     // 5. Normalize: Shift if there's a carry-out and adjust exponent
-    logic [8:0] exp_result
-    logic [6:0] mant_result
+    logic [8:0] exp_result;
+    logic [6:0] mant_result;
    
     always_comb begin
         if (mant_product[15]) begin
-            mant_result = mant_product[14:8]
-            exp_result = out_exponent + 1'b1
+            mant_result = mant_product[14:8];
+            exp_result = out_exponent + 1'b1;
         end
 
         else begin
