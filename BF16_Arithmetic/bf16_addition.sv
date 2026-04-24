@@ -51,6 +51,20 @@ module bf16_add (a, b, result);
 
     assign small_mant_moved = (exp_diff > 8) ? 8'd0 : (mant_small_start >> exp_diff);
 
+    logic [8:0] mant_sum;
+    logic final_sign;
+
+    always_comb begin
+        if(sign_large == sign_small) begin
+            mant_sum = {1'b0, mant_large_start} + {1'b0, mant_small_aligned};
+            final_sign = sign_large;
+        end
+        else begin
+            mant_sum = {1'b0, mant_large_start} - {1'b0, mant_small_aligned};
+            final_sign = sign_large;
+        end
+    end
+
     
 
 endmodule
