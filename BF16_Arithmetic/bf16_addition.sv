@@ -105,5 +105,4 @@ module bf16_add (a, b, result);
     end
 
     assign result = {final_sign, norm_exp, norm_mant[6:0]};
-
 endmodule
