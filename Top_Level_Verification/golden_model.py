@@ -95,5 +95,33 @@ def generate_mul_vectors(num_vectors=100, filename="Top_Level_Verification/mul_v
             
     print("Done!")
 
+def generate_add_vectors(num_vectors=100, filename="Top_Level_Verification/add_vectors.txt"):
+    """Generates random BF16 pairs and their expected sum for SV testing."""
+    print(f"Generating {num_vectors} addition test vectors into {filename}...")
+    
+    with open(filename, 'w') as f:
+        for _ in range(num_vectors):
+            # 1. Generate two random floats
+            a_float = np.random.uniform(-10.0, 10.0)
+            b_float = np.random.uniform(-10.0, 10.0)
+            
+            # 2. Convert them to our hardware BF16 format
+            a_bf16 = float_to_bf16_int(a_float)
+            b_bf16 = float_to_bf16_int(b_float)
+            
+            # 3. Simulate hardware math (ADD instead of multiply)
+            hw_a = bf16_int_to_float(a_bf16)
+            hw_b = bf16_int_to_float(b_bf16)
+            sum_float = hw_a + hw_b
+            
+            # 4. Convert the final sum back to BF16 format
+            sum_bf16 = float_to_bf16_int(sum_float)
+            
+            # 5. Write to file as Hex strings
+            f.write(f"{a_bf16:04X} {b_bf16:04X} {sum_bf16:04X}\n")
+            
+    print("Addition vectors done!")
+
 if __name__ == "__main__":
     generate_mul_vectors(10)
+    generate_add_vectors(10)
