@@ -106,3 +106,33 @@ module bf16_add (a, b, result);
 
     assign result = {final_sign, norm_exp, norm_mant[6:0]};
 endmodule
+
+module bf16_add_testbench ();
+    logic [15:0] a, b;
+	logic [15:0] result;
+    logic match;
+	
+	bf16_add dut (.a, .b, .result);
+	
+	// assign fullVal = {mult_high, mult_low};
+	
+	integer i;
+	initial begin
+		for(i=0; i<2; i++) begin
+			doSigned <= i[0];
+		
+			A <=  0; B <=  0; #10;
+            assert result = a + b;
+			A <=  1; B <=  2; #10;
+            assert result = a + b;
+			A <= -1; B <=  1; #10;
+            assert result = a + b;
+			A <= -1; B <= -1; #10;
+            assert result = a + b;
+			A <= 5<<35; B <= 6<<35; #10;
+            assert result = a + b;
+            
+		end
+	end
+
+endmodule
