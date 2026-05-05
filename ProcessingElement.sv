@@ -1,6 +1,6 @@
 module processing_element(a, b, result, clk, rst, en, clear);
     input logic [15:0] a, b;
-    input  logic clk, rst_n, en, clear;
+    input  logic clk, rst, en, clear;
     output logic [15:0] result;
 
     // First multiply a and b together
@@ -12,11 +12,11 @@ module processing_element(a, b, result, clk, rst, en, clear);
 
     logic [15:0] result_next;
 
-    bf16_add PE_Add (.a(mult_output), .b(accumulator), .result(add_out));
+    bf16_add PE_Add (.a(mul_output), .b(accumulator), .result(add_out));
 
     // Add to a global sum and then push the result once the completion is completed
-        always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+        always_ff @(posedge clk or negedge rst) begin
+        if (!rst) begin
             accumulator <= 16'h0000;
         end else if (clear) begin
             accumulator <= 16'h0000;

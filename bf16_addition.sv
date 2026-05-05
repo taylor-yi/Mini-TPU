@@ -3,7 +3,7 @@ module bf16_add (a, b, result);
     output [15:0] result;
 
     logic sign_a, sign_b;
-    logic [7:0] mantissa_a, mantissa_b;
+    logic [7:0] mant_a, mant_b;
     logic [7:0] exp_a, exp_b;
 
     assign sign_a = a[15];
@@ -12,8 +12,8 @@ module bf16_add (a, b, result);
     assign exp_a = a[14:7];
     assign exp_b = b[14:7];
 
-    assign mantissa_a = {1'b1, a[6:0]};
-    assign mantissa_b = {1'b1, b[6:0]};
+    assign mant_a = {1'b1, a[6:0]};
+    assign mant_b = {1'b1, b[6:0]};
 
     logic a_is_larger;
     logic [7:0] exp_large, exp_small;
