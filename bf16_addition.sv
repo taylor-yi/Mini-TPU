@@ -117,22 +117,55 @@ module bf16_add_testbench ();
 	// assign fullVal = {mult_high, mult_low};
 	
 	integer i;
-	initial begin
-		for(i=0; i<2; i++) begin
-			doSigned <= i[0];
-		
-			A <=  0; B <=  0; #10;
-            assert result = a + b;
-			A <=  1; B <=  2; #10;
-            assert result = a + b;
-			A <= -1; B <=  1; #10;
-            assert result = a + b;
-			A <= -1; B <= -1; #10;
-            assert result = a + b;
-			A <= 5<<35; B <= 6<<35; #10;
-            assert result = a + b;
-            
-		end
-	end
+	// BF16 helper function: pack a real value into 16-bit bfloat16 format
+    function automatic logic [15:0] to_bf16(input real val);
+        logic [31:0] fp32;
+        fp32 = $realtobits(real'(val));  // Get IEEE 754 single precision bits
+        return fp32[31:16];              // BF16 = top 16 bits of FP32
+    endfunction
 
+    // BF16 helper: convert bf16 back to real for comparison
+    function automatic real from_bf16(input logic [15:0] bf16);
+        logic [31:0] fp32;
+        fp32 = {bf16, 16'h0000};        // Zero-extend mantissa bits
+        return $bitstoreal(fp32);
+    endfunction
+
+    initial begin
+        // BF16 has ~3 decimal digits of precision; use epsilon-based comparison
+        real epsilon;
+        epsilon = 0.01;
+
+        // No signed/unsigned loop needed for FP — BF16 handles sign via sign bit
+        // Run once (sign is encoded in the BF16 value itself)
+
+        // 0.0 + 0.0 = 0.0
+        A <= to_bf16(0.0);  B <= to_bf16(0.0);  #10;
+        assert (from_bf16(result) == 0.0)
+            else $error("FAIL: 0.0 + 0.0 = %f (expected 0.0)", from_bf16(result));
+
+        // 1.0 + 2.0 = 3.0
+        A <= to_bf16(1.0);  B <= to_bf16(2.0);  #10;
+        assert ($abs(from_bf16(result) - 3.0) < epsilon)
+            else $error("FAIL: 1.0 + 2.0 = %f (expected 3.0)", from_bf16(result));
+
+        // -1.0 + 1.0 = 0.0
+        A <= to_bf16(-1.0); B <= to_bf16(1.0);  #10;
+        assert ($abs(from_bf16(result) - 0.0) < epsilon)
+            else $error("FAIL: -1.0 + 1.0 = %f (expected 0.0)", from_bf16(result));
+
+        // -1.0 + -1.0 = -2.0
+        A <= to_bf16(-1.0); B <= to_bf16(-1.0); #10;
+        assert ($abs(from_bf16(result) - (-2.0)) < epsilon)
+            else $error("FAIL: -1.0 + -1.0 = %f (expected -2.0)", from_bf16(result));
+
+        // Large values: replacing 5<<35 / 6<<35 with large FP equivalents
+        // 5.0 * 2^35 = 171798691840.0
+        A <= to_bf16(1.718e11); B <= to_bf16(2.061e11); #10;
+        assert ($abs(from_bf16(result) - 3.779e11) < (3.779e11 * epsilon))
+            else $error("FAIL: large + large = %e (expected ~3.779e11)", from_bf16(result));
+
+        $display("BF16 addition testbench complete.");
+        $finish;
+    end
 endmodule
