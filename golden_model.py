@@ -122,6 +122,32 @@ def generate_add_vectors(num_vectors=100, filename="Top_Level_Verification/add_v
             
     print("Addition vectors done!")
 
+def generate_matmul_vectors(num_tests=10, filename="matmul_vectors.txt"):
+    with open(filename, 'w') as f:
+        for _ in range(num_tests):
+            # Generate two random 4x4 matrices
+            A = [[random.uniform(-5.0, 5.0) for _ in range(4)] for _ in range(4)]
+            B = [[random.uniform(-5.0, 5.0) for _ in range(4)] for _ in range(4)]
+            
+            # Convert to BF16
+            A_bf16 = [[float_to_bf16_int(v) for v in row] for row in A]
+            B_bf16 = [[float_to_bf16_int(v) for v in row] for row in B]
+            
+            # Compute expected result using hardware_mac
+            C = [[0.0]*4 for _ in range(4)]
+            for i in range(4):
+                for j in range(4):
+                    acc = 0.0
+                    for k in range(4):
+                        acc = hardware_mac(A_bf16[i][k], B_bf16[k][j], acc)
+                    C[i][j] = float_to_bf16_int(acc)
+            
+            # Write: 16 A values, 16 B values, 16 expected C values — all on one line
+            a_str = ' '.join(f"{A_bf16[r][c]:04X}" for r in range(4) for c in range(4))
+            b_str = ' '.join(f"{B_bf16[r][c]:04X}" for r in range(4) for c in range(4))
+            c_str = ' '.join(f"{C[i][j]:04X}"     for i in range(4) for j in range(4))
+            f.write(f"{a_str} {b_str} {c_str}\n")
+
 if __name__ == "__main__":
     generate_mul_vectors(10)
     generate_add_vectors(10)

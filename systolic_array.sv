@@ -1,31 +1,30 @@
-module systolic_array(paraneter N = 3)(clk, rst, en, clear, a_in, b_in, result_out); //Paramterize the size for future scaling
+module systolic_array #(parameter N = 3) (
     input  logic        clk,
     input  logic        rst,
     input  logic        en,
     input  logic        clear,
-    
-    // Input activations: one per row, fed in from the left
-    input  logic [15:0] a_in [N-1:0],
 
-    // Input weights: one per column, fed in from the top
+    input  logic [15:0] a_in [N-1:0],
     input  logic [15:0] b_in [N-1:0],
 
-    // Output results: one per column, drained from the bottom
-    output logic [15:0] result_out [N-1:0];
-    
-    // TODO
+    output logic [15:0] result_out [N-1:0]
+);
+
+    // ----------------------------------------------------------------
+    // Claude Comment:
     // Internal wire mesh
-    // a_wire[row][col] carries the activation value flowing left → right
-    // b_wire[row][col] carries the weight value flowing top → bottom
-    // Each PE passes its input straight through to the next PE
+    // a_wire[row][col]: activation flowing left → right
+    // b_wire[row][col]: weight flowing top → bottom
+    //
+    // Fixed indexing vs. original:
+    //   a_wire needs N rows and N+1 columns (col 0 = input, col N = unused sink)
+    //   b_wire needs N+1 rows (row 0 = input, row N = unused sink) and N columns
     // ----------------------------------------------------------------
 
-    logic [15:0] a_wire [N:0][N-1:0];   // [row][col], extra row for inputs
-    logic [15:0] b_wire [N-1:0][N:0];   // [row][col], extra col for inputs
+    logic [15:0] a_wire [N-1:0][N:0];   // [row][col]
+    logic [15:0] b_wire [N:0][N-1:0];   // [row][col]
 
-    // ----------------------------------------------------------------
     // Hook up the boundary inputs
-    // ----------------------------------------------------------------
 
     genvar r, c;
     generate
@@ -37,9 +36,7 @@ module systolic_array(paraneter N = 3)(clk, rst, en, clear, a_in, b_in, result_o
         end
     endgenerate
 
-    // ----------------------------------------------------------------
     // Instantiate the NxN grid of processing elements
-    // ----------------------------------------------------------------
 
     generate
         for (r = 0; r < N; r++) begin : row
@@ -47,34 +44,36 @@ module systolic_array(paraneter N = 3)(clk, rst, en, clear, a_in, b_in, result_o
 
                 processing_element PE (
                     .clk    (clk),
-                    .rst_n  (rst_n),
+                    .rst    (rst),
                     .en     (en),
                     .clear  (clear),
-                    .a      (a_wire[r][c]),       // activation in from left
-                    .b      (b_wire[r][c]),       // weight in from top
-                    .result ()                    // TODO: wire up accumulator output
+                    .a      (a_wire[r][c]),
+                    .b      (b_wire[r][c]),
+                    .result ()
                 );
 
-                // Pass activation rightward
-                // TODO: register this for proper systolic timing
-                assign a_wire[r][c+1] = a_wire[r][c];
+                always_ff @(posedge clk or negedge rst) begin
+                    if (!rst)
+                        a_wire[r][c+1] <= 16'h0000;
+                    else
+                        a_wire[r][c+1] <= a_wire[r][c];
+                end
 
-                // Pass weight downward
-                // TODO: register this for proper systolic timing
-                assign b_wire[r+1][c] = b_wire[r][c];
+                always_ff @(posedge clk or negedge rst) begin
+                    if (!rst)
+                        b_wire[r+1][c] <= 16'h0000;
+                    else
+                        b_wire[r+1][c] <= b_wire[r][c];
+                end
 
             end
         end
     endgenerate
 
-    // ----------------------------------------------------------------
     // Drain results from the bottom row
-    // ----------------------------------------------------------------
-
     generate
         for (c = 0; c < N; c++) begin
-            // TODO: connect row[N-1].col[c] PE result to result_out[c]
-            assign result_out[c] = 16'h0000; // placeholder
+            assign result_out[c] = row[N-1].col[c].PE.result;
         end
     endgenerate
 

@@ -42,11 +42,11 @@ module bf16_add (a, b, result);
     end
 
     logic [7:0] exp_diff;
-    logic [7:0] small_mant_moved;
+    logic [7:0] mant_small_aligned;
 
     assign exp_diff = exp_large - exp_small;
 
-    assign small_mant_moved = (exp_diff > 8) ? 8'd0 : (mant_small_start >> exp_diff);
+    assign mant_small_aligned = (exp_diff > 8) ? 8'd0 : (mant_small_start >> exp_diff);
 
     logic [8:0] mant_sum;
     logic final_sign;
