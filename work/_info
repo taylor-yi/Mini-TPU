@@ -1,0 +1,178 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dA:/intelFPGA_lite/17.0
+vbf16_add
+Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z1 !s110 1779835697
+!i10b 1
+!s100 279:1AS]2kFDfj@<0VBOm3
+Iz;fa82I0N5SB_6<6Q20WW2
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 !s105 bf16_addition_sv_unit
+S1
+Z4 dA:/EE470/Mini-TPU
+Z5 w1779834281
+Z6 8A:/EE470/Mini-TPU/bf16_addition.sv
+Z7 FA:/EE470/Mini-TPU/bf16_addition.sv
+L0 1
+Z8 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z9 !s108 1779835697.000000
+Z10 !s107 A:/EE470/Mini-TPU/bf16_addition.sv|
+Z11 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_addition.sv|
+!i113 1
+Z12 o-work work -sv
+Z13 tCvgOpt 0
+vbf16_add_tb
+R0
+R1
+!i10b 1
+!s100 =RI04OO=?dKo9COQ7oaPH3
+Io1TG7mdXE881BJ^Ukih=E1
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 110
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vbf16_mul
+R0
+R1
+!i10b 1
+!s100 EjOSWK656TLD5>_fdb<hP2
+I99^AGL2>^Y5LO?0hmb?8;2
+R2
+Z14 !s105 bf16_mul_sv_unit
+S1
+R4
+Z15 w1779833895
+Z16 8A:/EE470/Mini-TPU/bf16_mul.sv
+Z17 FA:/EE470/Mini-TPU/bf16_mul.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+Z18 !s107 A:/EE470/Mini-TPU/bf16_mul.sv|
+Z19 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_mul.sv|
+!i113 1
+R12
+R13
+vbf16_mul_tb
+R0
+R1
+!i10b 1
+!s100 8__8;C=]ZSO@>J<TPbWRO0
+IC0LookD;Y617?7NFH3EFk3
+R2
+R14
+S1
+R4
+R15
+R16
+R17
+L0 63
+R8
+r1
+!s85 0
+31
+R9
+R18
+R19
+!i113 1
+R12
+R13
+vbf16_special_detection
+R0
+R1
+!i10b 1
+!s100 nK4ADF8?o7SaC:P0kONo^0
+IR=iI`fg`JeXbHb1[ESjBb0
+R2
+Z20 !s105 bf16_utils_sv_unit
+S1
+R4
+Z21 w1779833527
+Z22 8A:/EE470/Mini-TPU/bf16_utils.sv
+Z23 FA:/EE470/Mini-TPU/bf16_utils.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+Z24 !s107 A:/EE470/Mini-TPU/bf16_utils.sv|
+Z25 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_utils.sv|
+!i113 1
+R12
+R13
+vbf16_to_fp32
+R0
+R1
+!i10b 1
+!s100 nRiUZH2GB;8BQ5DTIRU360
+IIOH<29:>V011Lzmi_]DOg0
+R2
+R20
+S1
+R4
+R21
+R22
+R23
+L0 46
+R8
+r1
+!s85 0
+31
+R9
+R24
+R25
+!i113 1
+R12
+R13
+vfp32_to_bf16
+R0
+R1
+!i10b 1
+!s100 EOX2;8iCIbCa=hWTTXYC]1
+Icgdk]3flB:XE@D[OeU:[31
+R2
+R20
+S1
+R4
+R21
+R22
+R23
+L0 28
+R8
+r1
+!s85 0
+31
+R9
+R24
+R25
+!i113 1
+R12
+R13

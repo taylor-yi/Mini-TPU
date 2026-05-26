@@ -1,0 +1,28 @@
+A:/EE470/Mini-TPU/bf16_addition.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/bf16_addition.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module bf16_add
+-- Compiling module bf16_add_tb
+
+Top level modules:
+	bf16_add_tb
+
+} {} {}} A:/EE470/Mini-TPU/bf16_utils.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/bf16_utils.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module bf16_special_detection
+-- Compiling module fp32_to_bf16
+-- Compiling module bf16_to_fp32
+
+Top level modules:
+	bf16_special_detection
+	fp32_to_bf16
+	bf16_to_fp32
+
+} {} {}} A:/EE470/Mini-TPU/bf16_mul.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/bf16_mul.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module bf16_mul
+-- Compiling module bf16_mul_tb
+
+Top level modules:
+	bf16_mul_tb
+
+} {} {}}

@@ -21,6 +21,18 @@ def float_to_bf16_int(f_val):
     bf16_val = int32_val >> 16
     return bf16_val
 
+def float_to_bf16_truncate(f_val):
+    """
+    Simulates hardware truncation by simply chopping the bottom 16 bits
+    without applying Round-to-Nearest-Even logic.
+    """
+    packed32 = struct.pack('>f', f_val)
+    int32_val = struct.unpack('>I', packed32)[0]
+    
+    # Strictly chop, no bias added
+    bf16_val = int32_val >> 16
+    return bf16_val
+
 def bf16_int_to_float(bf16_val):
     """
     Converts a 16-bit BF16 integer back into a Python float for NumPy to use.
@@ -61,7 +73,7 @@ def hardware_mac(bf16_input_a, bf16_input_b, current_fp32_accumulator):
 
 
 # ---- Vector Text File Generation for SV Testing ---- #
-def generate_mul_vectors(num_vectors=100, filename="Top_Level_Verification/mul_vectors.txt"):
+def generate_mul_vectors(num_vectors=100, filename="mul_vectors.txt"):
     """
     Generates random BF16 pairs and their expected product for SV testing.
     In format [input_a input_b expected_product] where each is a 4-character Hex string
@@ -87,7 +99,7 @@ def generate_mul_vectors(num_vectors=100, filename="Top_Level_Verification/mul_v
             product_float = hw_a * hw_b
             
             # 4. Convert the final product back to BF16 format to check the output
-            product_bf16 = float_to_bf16_int(product_float)
+            product_bf16 = float_to_bf16_truncate(product_float)
             
             # 5. Write to file as 4-character Hex strings (e.g., "C000 4000 C000")
             # Format: Input_A Input_B Expected_Product
@@ -95,7 +107,7 @@ def generate_mul_vectors(num_vectors=100, filename="Top_Level_Verification/mul_v
             
     print("Done!")
 
-def generate_add_vectors(num_vectors=100, filename="Top_Level_Verification/add_vectors.txt"):
+def generate_add_vectors(num_vectors=100, filename="add_vectors.txt"):
     """Generates random BF16 pairs and their expected sum for SV testing."""
     print(f"Generating {num_vectors} addition test vectors into {filename}...")
     
