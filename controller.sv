@@ -52,12 +52,24 @@ module controller #(parameter N = 4) (
     state_t state, next_state;
 
     // Cycle counter — wide enough for 3N-1 counts
-    localparam LOAD_CYCLES    = 2 * N - 1;  // cycles to stream all skewed data in
+    localparam LOAD_CYCLES = 2 * N - 1;  // cycles to stream all skewed data in
     localparam COMPUTE_CYCLES = N;           // extra cycles for last data to settle
-    localparam TOTAL_ACTIVE   = LOAD_CYCLES + COMPUTE_CYCLES; // = 3N-1
+    localparam TOTAL_ACTIVE = LOAD_CYCLES + COMPUTE_CYCLES; // = 3N-1
 
     localparam CTR_WIDTH = $clog2(TOTAL_ACTIVE + 2);
     logic [CTR_WIDTH-1:0] cycle_cnt;
+
+    logic done_reg; 
+
+    always_ff @(posedge clk or negedge rst) begin
+        if (!rst)
+            done_reg <= 1'b0;
+        else if (start)
+            done_reg <= 1'b0;
+        else if (state == DRAIN)
+            done_reg <= 1'b1;
+    end
+    assign done = done_reg;
 
     always_ff @(posedge clk or negedge rst) begin
         if (!rst)
@@ -108,9 +120,7 @@ module controller #(parameter N = 4) (
 
         case (state)
             IDLE: begin
-                // Clear the array so accumulators are zeroed before next run.
                 array_clear = 1'b1;
-                done        = 1'b0;
             end
 
             LOAD: begin
@@ -124,7 +134,6 @@ module controller #(parameter N = 4) (
 
             DRAIN: begin
                 drain_en = 1'b1;
-                done     = 1'b1;
             end
         endcase
     end

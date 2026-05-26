@@ -1,4 +1,4 @@
-module systolic_array #(parameter N = 3) (
+module systolic_array #(parameter N = 4) (
     input  logic        clk,
     input  logic        rst,
     input  logic        en,
@@ -37,7 +37,7 @@ module systolic_array #(parameter N = 3) (
     endgenerate
 
     // Instantiate the NxN grid of processing elements
-
+    logic [15:0] pe_result [N-1:0][N-1:0];
     generate
         for (r = 0; r < N; r++) begin : row
             for (c = 0; c < N; c++) begin : col
@@ -49,7 +49,7 @@ module systolic_array #(parameter N = 3) (
                     .clear  (clear),
                     .a      (a_wire[r][c]),
                     .b      (b_wire[r][c]),
-                    .result ()
+                    .result (pe_result[r][c])
                 );
 
                 always_ff @(posedge clk or negedge rst) begin
@@ -73,7 +73,8 @@ module systolic_array #(parameter N = 3) (
     // Drain results from the bottom row
     generate
         for (c = 0; c < N; c++) begin
-            assign result_out[c] = row[N-1].col[c].PE.result;
+            // assign result_out[c] = row[N-1].col[c].PE.result;
+            assign result_out[c] = pe_result[N-1][c];
         end
     endgenerate
 

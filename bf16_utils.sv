@@ -4,10 +4,9 @@ module bf16_special_detection(num_input, infinity, NaN, zero);
 
 // Check for NaN, Infinity and Zero, based on the special cases
     always_comb begin
-        default: 
-            infinity = 1'b0;
-            NaN = 1'b0;
-            zero = 1'b0;
+        infinity = 1'b0;
+        NaN = 1'b0;
+        zero = 1'b0;
 
         if(num_input[14:7] == 8'hFF) begin
             if(num_input[6:0] == 0) begin

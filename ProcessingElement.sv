@@ -25,6 +25,6 @@ module processing_element(a, b, result, clk, rst, en, clear);
     end
 
     // Narrow back to BF16 only at the output
-    fp32_to_bf16 narrow_result (.fp32_in(accumulator), .fp32_out(result));
+    fp32_to_bf16 narrow_result (.fp32_in(accumulator), .bf16_out(result));
 
 endmodule
