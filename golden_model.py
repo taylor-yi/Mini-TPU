@@ -98,7 +98,7 @@ def generate_mul_vectors(num_vectors=100, filename="mul_vectors.txt"):
             hw_b = bf16_int_to_float(b_bf16)
             product_float = hw_a * hw_b
             
-            # 4. Convert the final product back to BF16 format to check the output
+            # 4. Convert the final product back to BF16 format to check the output using TRUNCATION (not rounding)
             product_bf16 = float_to_bf16_truncate(product_float)
             
             # 5. Write to file as 4-character Hex strings (e.g., "C000 4000 C000")
@@ -126,8 +126,8 @@ def generate_add_vectors(num_vectors=100, filename="add_vectors.txt"):
             hw_b = bf16_int_to_float(b_bf16)
             sum_float = hw_a + hw_b
             
-            # 4. Convert the final sum back to BF16 format
-            sum_bf16 = float_to_bf16_int(sum_float)
+            # 4. Convert the final sum back to BF16 format using TRUNCATION
+            sum_bf16 = float_to_bf16_truncate(sum_float)
             
             # 5. Write to file as Hex strings
             f.write(f"{a_bf16:04X} {b_bf16:04X} {sum_bf16:04X}\n")
