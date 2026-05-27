@@ -139,8 +139,11 @@ module mini_tpu_top_tb ();
                     // Hardware Precision Tolerance (Epsilon Margin)
                     begin
                         int diff;
-                        logic [14:0] mag_act = C_actual[r][c][14:0];
-                        logic [14:0] mag_exp = C_expected[r][c][14:0];
+                        logic [14:0] mag_act;
+                        logic [14:0] mag_exp;
+                        
+                        mag_act = C_actual[r][c][14:0];
+                        mag_exp = C_expected[r][c][14:0];
                         
                         if (C_actual[r][c][15] == C_expected[r][c][15])
                             diff = (mag_act > mag_exp) ? (mag_act - mag_exp) : (mag_exp - mag_act);

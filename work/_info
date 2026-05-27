@@ -10,7 +10,7 @@ cModel Technology
 dA:/intelFPGA_lite/17.0
 vbf16_add
 Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 !s110 1779868624
+Z1 !s110 1779868859
 !i10b 1
 !s100 279:1AS]2kFDfj@<0VBOm3
 Iz;fa82I0N5SB_6<6Q20WW2
@@ -26,7 +26,7 @@ Z8 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z9 !s108 1779868624.000000
+Z9 !s108 1779868859.000000
 Z10 !s107 A:/EE470/Mini-TPU/bf16_addition.sv|
 Z11 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_addition.sv|
 !i113 1
@@ -226,7 +226,7 @@ R12
 R13
 vmem_interface
 R0
-Z26 !s110 1779868625
+R1
 !i10b 1
 !s100 Fz8BWZm^M^zVnW3N2n:oz0
 IZZ]5ZG:^:TWIZ=mQAGEOj2
@@ -242,7 +242,7 @@ R8
 r1
 !s85 0
 31
-Z27 !s108 1779868625.000000
+R9
 !s107 A:/EE470/Mini-TPU/mem_interface.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mem_interface.sv|
 !i113 1
@@ -250,7 +250,7 @@ R12
 R13
 vmini_tpu_top
 R0
-R26
+Z26 !s110 1779868860
 !i10b 1
 !s100 EZVaa4SjHFVRPHdIgDRR`3
 IN[If<NODd`8lG?Y9KkEfZ0
@@ -266,7 +266,7 @@ R8
 r1
 !s85 0
 31
-R27
+R9
 !s107 A:/EE470/Mini-TPU/mini_tpu_top.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mini_tpu_top.sv|
 !i113 1
@@ -274,23 +274,23 @@ R12
 R13
 vmini_tpu_top_tb
 R0
-!s110 1779868486
+R26
 !i10b 1
-!s100 9dU79:C_UbMJ_]H:b>E?G3
-IWECcSXo4]=h`Kd>YOTil:1
+!s100 aX46]6P8Wl3NXW8TlCFJY1
+IHGCE6PUbc4ahV:20SK`oz3
 R2
-Z28 !s105 mini_tpu_top_tb_sv_unit
+Z27 !s105 mini_tpu_top_tb_sv_unit
 S1
 R4
-w1779866419
-Z29 8A:/EE470/Mini-TPU/mini_tpu_top_tb.sv
-Z30 FA:/EE470/Mini-TPU/mini_tpu_top_tb.sv
+w1779868849
+Z28 8A:/EE470/Mini-TPU/mini_tpu_top_tb.sv
+Z29 FA:/EE470/Mini-TPU/mini_tpu_top_tb.sv
 L0 1
 R8
 r1
 !s85 0
 31
-!s108 1779868486.000000
+Z30 !s108 1779868860.000000
 Z31 !s107 A:/EE470/Mini-TPU/mini_tpu_top_tb.sv|
 Z32 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mini_tpu_top_tb.sv|
 !i113 1
@@ -314,7 +314,7 @@ R8
 r1
 !s85 0
 31
-R27
+R30
 !s107 A:/EE470/Mini-TPU/ProcessingElement.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/ProcessingElement.sv|
 !i113 1
@@ -338,7 +338,7 @@ R8
 r1
 !s85 0
 31
-R27
+R30
 !s107 A:/EE470/Mini-TPU/systolic_array.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/systolic_array.sv|
 !i113 1
@@ -351,12 +351,12 @@ R0
 !s100 fToj=RBTmBekJSa`W5G;N2
 I^XDh64LaoZaa4Qdd>k4g^2
 R2
-R28
+R27
 S1
 R4
 w1779865895
+R28
 R29
-R30
 L0 1
 R8
 r1
