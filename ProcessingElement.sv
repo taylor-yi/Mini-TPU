@@ -1,6 +1,6 @@
-module processing_element(a, b, result, clk, rst, en, clear);
-    input  logic [15:0] a, b;
-    input  logic        clk, rst, en, clear;
+module processing_element(a, b, data_from_above, result, clk, rst, en, clear, drain_en);
+    input  logic [15:0] a, b, data_from_above;
+    input  logic        clk, rst, en, clear, drain_en;
     output logic [15:0] result;
 
     logic [15:0] mul_bf16;
@@ -18,10 +18,20 @@ module processing_element(a, b, result, clk, rst, en, clear);
     logic [31:0] add_fp32_out;
     fp32_add PE_Add (.a(mul_fp32), .b(accumulator), .result(add_fp32_out));
 
+    // We must cast the data coming from above into FP32 so it fits in the accumulator
+    logic [31:0] drain_data_fp32;
+    bf16_to_fp32 widen_drain (.bf16_in(data_from_above), .fp32_out(drain_data_fp32));
+
     always_ff @(posedge clk or negedge rst) begin
-        if (!rst)        accumulator <= 32'h0000_0000;
-        else if (clear)  accumulator <= 32'h0000_0000;
-        else if (en)     accumulator <= add_fp32_out;
+        if (!rst) begin
+            accumulator <= 32'h0000_0000;
+        end else if (clear) begin
+            accumulator <= 32'h0000_0000;
+        end else if (drain_en) begin        // if draining to next PE, load new data from above instead of adding
+            accumulator <= drain_data_fp32;  // Load new data from above when draining
+        end else if (en) begin
+            accumulator <= add_fp32_out;
+        end
     end
 
     // Narrow back to BF16 only at the output

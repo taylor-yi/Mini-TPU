@@ -3,6 +3,7 @@ module systolic_array #(parameter N = 4) (
     input  logic        rst,
     input  logic        en,
     input  logic        clear,
+    input  logic        drain_en,
 
     input  logic [15:0] a_in [N-1:0],
     input  logic [15:0] b_in [N-1:0],
@@ -38,18 +39,21 @@ module systolic_array #(parameter N = 4) (
 
     // Instantiate the NxN grid of processing elements
     logic [15:0] pe_result [N-1:0][N-1:0];
+
     generate
         for (r = 0; r < N; r++) begin : row
             for (c = 0; c < N; c++) begin : col
 
                 processing_element PE (
-                    .clk    (clk),
-                    .rst    (rst),
-                    .en     (en),
-                    .clear  (clear),
-                    .a      (a_wire[r][c]),
-                    .b      (b_wire[r][c]),
-                    .result (pe_result[r][c])
+                    .clk      (clk),
+                    .rst      (rst),
+                    .en       (en),
+                    .clear    (clear),
+                    .drain_en (drain_en),
+                    .a        (a_wire[r][c]),
+                    .b        (b_wire[r][c]),
+                    .data_from_above (r == 0 ? 16'h0000 : pe_result[r-1][c]), // top row gets 0, others get data from above PE
+                    .result   (pe_result[r][c])
                 );
 
                 always_ff @(posedge clk or negedge rst) begin

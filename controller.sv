@@ -106,6 +106,7 @@ module controller #(parameter N = 4) (
             end
 
             DRAIN: begin
+                if (cycle_cnt == CTR_WIDTH'(N-1)) // drain for N cycles to ensure results are latched before going back to IDLE
                 next_state = IDLE;
             end
         endcase

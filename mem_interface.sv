@@ -32,7 +32,7 @@ module mem_interface #(parameter N = 4) (
     input  logic [15:0] result_in [N-1:0],
 
     // Latched result output to top level
-    output logic [N*16-1:0] result_flat,
+    output logic [N*N*16-1:0] result_flat,  // N * N spots of 16-bit results, packed into a flat array
     output logic            result_valid    // high for one cycle when results are latched
 );
 
@@ -112,26 +112,52 @@ module mem_interface #(parameter N = 4) (
     // -------------------------------------------------------------------------
     // Output drain: latch results when controller asserts drain_en
     // -------------------------------------------------------------------------
-    logic [15:0] result_reg [N-1:0];
+    logic [15:0] result_matrix [N-1:0][N-1:0]; // [row][col], matches PE output layout
 
-    genvar j;
+    always_ff @(posedge clk or negedge rst) begin
+        if (!rst) begin
+            for(int r=0; r<N; r++) for(int c=0; c<N; c++) result_matrix[r][c] <= 16'h0000;
+        end else if (drain_en) begin
+            for (int c = 0; c < N; c++) begin
+                // Shift the saved data DOWN to make room at the top of our basket
+                for (int r = N-1; r > 0; r--) begin
+                    result_matrix[r][c] <= result_matrix[r-1][c];
+                end
+                // Catch the newest row falling out of the array
+                result_matrix[0][c] <= result_in[c];
+            end
+        end
+    end
+
+    // Pack the 2D array into the massive flat output bus
+    genvar r_out, c_out;
     generate
-        for (j = 0; j < N; j++) begin : drain
-            always_ff @(posedge clk or negedge rst) begin
-                if (!rst)
-                    result_reg[j] <= 16'h0000;
-                else if (drain_en)
-                    result_reg[j] <= result_in[j];
+        for (r_out = 0; r_out < N; r_out++) begin : pack_row
+            for (c_out = 0; c_out < N; c_out++) begin : pack_col
+                // This maps the 2D grid into a single 256-bit wide line of wires
+                assign result_flat[16*(r_out*N + c_out + 1) - 1 : 16*(r_out*N + c_out)] = result_matrix[r_out][c_out];
             end
         end
     endgenerate
 
-    // Pack result array into flat output bus
-    generate
-        for (i = 0; i < N; i++) begin : pack_result
-            assign result_flat[16*(i+1)-1 : 16*i] = result_reg[i];
-        end
-    endgenerate
+    // genvar j;
+    // generate
+    //     for (j = 0; j < N; j++) begin : drain
+    //         always_ff @(posedge clk or negedge rst) begin
+    //             if (!rst)
+    //                 result_reg[j] <= 16'h0000;
+    //             else if (drain_en)
+    //                 result_reg[j] <= result_in[j];
+    //         end
+    //     end
+    // endgenerate
+
+    // // Pack result array into flat output bus
+    // generate
+    //     for (i = 0; i < N; i++) begin : pack_result
+    //         assign result_flat[16*(i+1)-1 : 16*i] = result_reg[i];
+    //     end
+    // endgenerate
 
     // result_valid pulses for exactly one cycle after drain_en
     always_ff @(posedge clk or negedge rst) begin

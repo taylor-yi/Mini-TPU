@@ -29,7 +29,7 @@ module mini_tpu_top #(parameter N = 4) (
     input  logic [N*16-1:0] a_flat, // activation rows, packed BF16
     input  logic [N*16-1:0] b_flat, // weight columns, packed BF16
 
-    output logic [N*16-1:0] result_flat,
+    output logic [N*N*16-1:0] result_flat,
     output logic            result_valid,
     output logic            done
 );
@@ -81,6 +81,7 @@ module mini_tpu_top #(parameter N = 4) (
         .clk        (clk),
         .rst        (rst),
         .en         (array_en),
+        .drain_en   (drain_en),
         .clear      (array_clear),
         .a_in       (a_skewed),
         .b_in       (b_skewed),
