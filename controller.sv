@@ -66,7 +66,7 @@ module controller #(parameter N = 4) (
             done_reg <= 1'b0;
         else if (start)
             done_reg <= 1'b0;
-        else if (state == DRAIN)
+        else if (state == DRAIN && next_state == IDLE)  //Only trigger done when the 4-cycle drain is actually finishing
             done_reg <= 1'b1;
     end
     assign done = done_reg;

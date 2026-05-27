@@ -159,12 +159,30 @@ module mem_interface #(parameter N = 4) (
     //     end
     // endgenerate
 
-    // result_valid pulses for exactly one cycle after drain_en
+    // // result_valid pulses for exactly one cycle after drain_en
+    // always_ff @(posedge clk or negedge rst) begin
+    //     if (!rst)
+    //         result_valid <= 1'b0;
+    //     else
+    //         result_valid <= drain_en;
+    // end
+
+    // -------------------------------------------------------------------------
+    // Falling Edge Detector for result_valid
+    // -------------------------------------------------------------------------
+    logic drain_en_delay;
+
     always_ff @(posedge clk or negedge rst) begin
-        if (!rst)
-            result_valid <= 1'b0;
-        else
-            result_valid <= drain_en;
+        if (!rst) begin
+            drain_en_delay <= 1'b0;
+            result_valid   <= 1'b0;
+        end else begin
+            // Save the state of drain_en from the previous clock cycle
+            drain_en_delay <= drain_en;
+            
+            // Pulse HIGH for exactly one cycle when drain_en turns OFF
+            result_valid   <= (drain_en_delay && !drain_en); 
+        end
     end
 
 endmodule
