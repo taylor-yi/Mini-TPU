@@ -152,7 +152,7 @@ def generate_matmul_vectors(num_tests=10, filename="matmul_vectors.txt"):
                     acc = 0.0
                     for k in range(4):
                         acc = hardware_mac(A_bf16[i][k], B_bf16[k][j], acc)
-                    C[i][j] = float_to_bf16_int(acc)
+                    C[i][j] = float_to_bf16_truncate(acc)
             
             # Write: 16 A values, 16 B values, 16 expected C values — all on one line
             a_str = ' '.join(f"{A_bf16[r][c]:04X}" for r in range(4) for c in range(4))
