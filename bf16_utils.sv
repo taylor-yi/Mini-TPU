@@ -32,14 +32,16 @@ module fp32_to_bf16 (fp32_in, bf16_out);
     logic [31:0] rounding_bias;
     logic [31:0] rounded_val;
 
-    // Add 0x7FFF plus the 16th bit (which will become our new LSB)
-    assign rounding_bias = 32'h0000_7FFF + {31'b0, fp32_in[16]};
+    // // Add 0x7FFF plus the 16th bit (which will become our new LSB)
+    // assign rounding_bias = 32'h0000_7FFF + {31'b0, fp32_in[16]};
     
-    // Add the bias to force the round up or round down
-    assign rounded_val = fp32_in + rounding_bias;
+    // // Add the bias to force the round up or round down
+    // assign rounded_val = fp32_in + rounding_bias;
 
-    // Truncate the bottom 16 bits to get the final BF16 value
-    assign bf16_out = rounded_val[31:16];
+    // // Truncate the bottom 16 bits to get the final BF16 value
+    // assign bf16_out = rounded_val[31:16];
+    // Strictly truncate the bottom 16 bits to match the Python software
+    assign bf16_out = fp32_in[31:16];
     
 endmodule
 
