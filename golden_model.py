@@ -163,3 +163,4 @@ def generate_matmul_vectors(num_tests=10, filename="matmul_vectors.txt"):
 if __name__ == "__main__":
     generate_mul_vectors(10)
     generate_add_vectors(10)
+    generate_matmul_vectors(10)
