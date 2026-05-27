@@ -10,7 +10,7 @@ cModel Technology
 dA:/intelFPGA_lite/17.0
 vbf16_add
 Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 !s110 1779866119
+Z1 !s110 1779866381
 !i10b 1
 !s100 279:1AS]2kFDfj@<0VBOm3
 Iz;fa82I0N5SB_6<6Q20WW2
@@ -26,7 +26,7 @@ Z8 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z9 !s108 1779866119.000000
+Z9 !s108 1779866381.000000
 Z10 !s107 A:/EE470/Mini-TPU/bf16_addition.sv|
 Z11 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_addition.sv|
 !i113 1
@@ -152,9 +152,33 @@ R25
 !i113 1
 R12
 R13
-vfp32_add
+vcontroller
 R0
 R1
+!i10b 1
+!s100 ^]NRY=R]:GBg=?Ja@^BTe3
+InjSWg0]A>B<XcWQ_F6^d>1
+R2
+!s105 controller_sv_unit
+S1
+R4
+w1779866258
+8A:/EE470/Mini-TPU/controller.sv
+FA:/EE470/Mini-TPU/controller.sv
+L0 29
+R8
+r1
+!s85 0
+31
+R9
+!s107 A:/EE470/Mini-TPU/controller.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/controller.sv|
+!i113 1
+R12
+R13
+vfp32_add
+R0
+Z26 !s110 1779866382
 !i10b 1
 !s100 m^`DIZlAH21d4o[zWNL0;0
 IAn`;9:QHMmXO2DB;7j9AU1
@@ -202,7 +226,7 @@ R12
 R13
 vmem_interface
 R0
-Z26 !s110 1779866120
+R26
 !i10b 1
 !s100 Fz8BWZm^M^zVnW3N2n:oz0
 IZZ]5ZG:^:TWIZ=mQAGEOj2
@@ -218,7 +242,7 @@ R8
 r1
 !s85 0
 31
-R9
+Z27 !s108 1779866382.000000
 !s107 A:/EE470/Mini-TPU/mem_interface.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mem_interface.sv|
 !i113 1
@@ -242,7 +266,7 @@ R8
 r1
 !s85 0
 31
-Z27 !s108 1779866120.000000
+R27
 !s107 A:/EE470/Mini-TPU/mini_tpu_top.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mini_tpu_top.sv|
 !i113 1

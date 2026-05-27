@@ -6,6 +6,34 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	bf16_add_tb
 
+} {} {}} A:/EE470/Mini-TPU/ProcessingElement.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/ProcessingElement.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module processing_element
+
+Top level modules:
+	processing_element
+
+} {} {}} A:/EE470/Mini-TPU/mini_tpu_top.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/mini_tpu_top.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mini_tpu_top
+
+Top level modules:
+	mini_tpu_top
+
+} {} {}} A:/EE470/Mini-TPU/mem_interface.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/mem_interface.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mem_interface
+
+Top level modules:
+	mem_interface
+
+} {} {}} A:/EE470/Mini-TPU/fp32_add.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/fp32_add.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module fp32_add
+
+Top level modules:
+	fp32_add
+
 } {} {}} A:/EE470/Mini-TPU/bf16_utils.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/bf16_utils.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module bf16_special_detection
@@ -16,6 +44,20 @@ Top level modules:
 	bf16_special_detection
 	fp32_to_bf16
 	bf16_to_fp32
+
+} {} {}} A:/EE470/Mini-TPU/systolic_array.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/systolic_array.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module systolic_array
+
+Top level modules:
+	systolic_array
+
+} {} {}} A:/EE470/Mini-TPU/controller.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/controller.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module controller
+
+Top level modules:
+	controller
 
 } {} {}} A:/EE470/Mini-TPU/bf16_mul.sv {1 {vlog -work work -sv -stats=none A:/EE470/Mini-TPU/bf16_mul.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016

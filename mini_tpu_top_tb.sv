@@ -1,4 +1,4 @@
-module tb_mini_tpu_top ();
+module mini_tpu_top_tb ();
 
     localparam N = 4;
 
