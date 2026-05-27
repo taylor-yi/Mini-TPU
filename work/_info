@@ -10,7 +10,7 @@ cModel Technology
 dA:/intelFPGA_lite/17.0
 vbf16_add
 Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 !s110 1779866435
+Z1 !s110 1779866733
 !i10b 1
 !s100 279:1AS]2kFDfj@<0VBOm3
 Iz;fa82I0N5SB_6<6Q20WW2
@@ -26,7 +26,7 @@ Z8 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z9 !s108 1779866435.000000
+Z9 !s108 1779866733.000000
 Z10 !s107 A:/EE470/Mini-TPU/bf16_addition.sv|
 Z11 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_addition.sv|
 !i113 1
@@ -106,55 +106,55 @@ R12
 R13
 vbf16_special_detection
 R0
-R1
+Z20 !s110 1779866734
 !i10b 1
 !s100 nK4ADF8?o7SaC:P0kONo^0
 IR=iI`fg`JeXbHb1[ESjBb0
 R2
-Z20 !s105 bf16_utils_sv_unit
+Z21 !s105 bf16_utils_sv_unit
 S1
 R4
-Z21 w1779833527
-Z22 8A:/EE470/Mini-TPU/bf16_utils.sv
-Z23 FA:/EE470/Mini-TPU/bf16_utils.sv
+Z22 w1779833527
+Z23 8A:/EE470/Mini-TPU/bf16_utils.sv
+Z24 FA:/EE470/Mini-TPU/bf16_utils.sv
 L0 1
 R8
 r1
 !s85 0
 31
 R9
-Z24 !s107 A:/EE470/Mini-TPU/bf16_utils.sv|
-Z25 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_utils.sv|
+Z25 !s107 A:/EE470/Mini-TPU/bf16_utils.sv|
+Z26 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_utils.sv|
 !i113 1
 R12
 R13
 vbf16_to_fp32
 R0
-R1
+R20
 !i10b 1
 !s100 nRiUZH2GB;8BQ5DTIRU360
 IIOH<29:>V011Lzmi_]DOg0
 R2
-R20
+R21
 S1
 R4
-R21
 R22
 R23
+R24
 L0 46
 R8
 r1
 !s85 0
 31
 R9
-R24
 R25
+R26
 !i113 1
 R12
 R13
 vcontroller
 R0
-R1
+R20
 !i10b 1
 !s100 ^]NRY=R]:GBg=?Ja@^BTe3
 InjSWg0]A>B<XcWQ_F6^d>1
@@ -170,7 +170,7 @@ R8
 r1
 !s85 0
 31
-R9
+Z27 !s108 1779866734.000000
 !s107 A:/EE470/Mini-TPU/controller.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/controller.sv|
 !i113 1
@@ -178,7 +178,7 @@ R12
 R13
 vfp32_add
 R0
-R1
+R20
 !i10b 1
 !s100 m^`DIZlAH21d4o[zWNL0;0
 IAn`;9:QHMmXO2DB;7j9AU1
@@ -186,7 +186,7 @@ R2
 !s105 fp32_add_sv_unit
 S1
 R4
-R21
+R22
 8A:/EE470/Mini-TPU/fp32_add.sv
 FA:/EE470/Mini-TPU/fp32_add.sv
 L0 1
@@ -194,7 +194,7 @@ R8
 r1
 !s85 0
 31
-R9
+R27
 !s107 A:/EE470/Mini-TPU/fp32_add.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/fp32_add.sv|
 !i113 1
@@ -202,31 +202,31 @@ R12
 R13
 vfp32_to_bf16
 R0
-R1
+R20
 !i10b 1
 !s100 EOX2;8iCIbCa=hWTTXYC]1
 Icgdk]3flB:XE@D[OeU:[31
 R2
-R20
+R21
 S1
 R4
-R21
 R22
 R23
+R24
 L0 28
 R8
 r1
 !s85 0
 31
 R9
-R24
 R25
+R26
 !i113 1
 R12
 R13
 vmem_interface
 R0
-R1
+R20
 !i10b 1
 !s100 Fz8BWZm^M^zVnW3N2n:oz0
 IZZ]5ZG:^:TWIZ=mQAGEOj2
@@ -242,7 +242,7 @@ R8
 r1
 !s85 0
 31
-R9
+R27
 !s107 A:/EE470/Mini-TPU/mem_interface.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mem_interface.sv|
 !i113 1
@@ -250,7 +250,7 @@ R12
 R13
 vmini_tpu_top
 R0
-R1
+R20
 !i10b 1
 !s100 EZVaa4SjHFVRPHdIgDRR`3
 IN[If<NODd`8lG?Y9KkEfZ0
@@ -266,7 +266,7 @@ R8
 r1
 !s85 0
 31
-R9
+R27
 !s107 A:/EE470/Mini-TPU/mini_tpu_top.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mini_tpu_top.sv|
 !i113 1
@@ -274,31 +274,31 @@ R12
 R13
 vmini_tpu_top_tb
 R0
-R1
+R20
 !i10b 1
 !s100 9dU79:C_UbMJ_]H:b>E?G3
 IWECcSXo4]=h`Kd>YOTil:1
 R2
-Z26 !s105 mini_tpu_top_tb_sv_unit
+Z28 !s105 mini_tpu_top_tb_sv_unit
 S1
 R4
 w1779866419
-Z27 8A:/EE470/Mini-TPU/mini_tpu_top_tb.sv
-Z28 FA:/EE470/Mini-TPU/mini_tpu_top_tb.sv
+Z29 8A:/EE470/Mini-TPU/mini_tpu_top_tb.sv
+Z30 FA:/EE470/Mini-TPU/mini_tpu_top_tb.sv
 L0 1
 R8
 r1
 !s85 0
 31
-R9
-Z29 !s107 A:/EE470/Mini-TPU/mini_tpu_top_tb.sv|
-Z30 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mini_tpu_top_tb.sv|
+R27
+Z31 !s107 A:/EE470/Mini-TPU/mini_tpu_top_tb.sv|
+Z32 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mini_tpu_top_tb.sv|
 !i113 1
 R12
 R13
 vprocessing_element
 R0
-Z31 !s110 1779866436
+R20
 !i10b 1
 !s100 n[33Y1Z45TeSfdPRdXg^23
 InRmW6eZYacNCA;J3ZhXoB1
@@ -314,7 +314,7 @@ R8
 r1
 !s85 0
 31
-R9
+R27
 !s107 A:/EE470/Mini-TPU/ProcessingElement.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/ProcessingElement.sv|
 !i113 1
@@ -322,7 +322,7 @@ R12
 R13
 vsystolic_array
 R0
-R31
+R20
 !i10b 1
 !s100 FlG6ZWHbF?fP8Mhg;:2z@3
 I4R6P021lnJPQQ8B>n=56G0
@@ -338,7 +338,7 @@ R8
 r1
 !s85 0
 31
-!s108 1779866436.000000
+R27
 !s107 A:/EE470/Mini-TPU/systolic_array.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/systolic_array.sv|
 !i113 1
@@ -351,20 +351,20 @@ R0
 !s100 fToj=RBTmBekJSa`W5G;N2
 I^XDh64LaoZaa4Qdd>k4g^2
 R2
-R26
+R28
 S1
 R4
 w1779865895
-R27
-R28
+R29
+R30
 L0 1
 R8
 r1
 !s85 0
 31
 !s108 1779866382.000000
-R29
-R30
+R31
+R32
 !i113 1
 R12
 R13
