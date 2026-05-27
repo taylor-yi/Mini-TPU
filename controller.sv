@@ -129,6 +129,8 @@ module controller #(parameter N = 4) (
             end
 
             COMPUTE: begin
+                load_en = 1'b1;   // Keep load_en high to keep shifting data through skew buffers, even though a_flat/b_flat are zero.
+                                  // This keeps the timing consistent and lets the last data ripple through the array.
                 array_en = 1'b1;
             end
 
