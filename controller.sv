@@ -117,7 +117,6 @@ module controller #(parameter N = 4) (
         array_en    = 1'b0;
         array_clear = 1'b0;
         drain_en    = 1'b0;
-        done        = 1'b0;
 
         case (state)
             IDLE: begin

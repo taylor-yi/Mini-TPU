@@ -10,7 +10,7 @@ cModel Technology
 dA:/intelFPGA_lite/17.0
 vbf16_add
 Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 !s110 1779837598
+Z1 !s110 1779866119
 !i10b 1
 !s100 279:1AS]2kFDfj@<0VBOm3
 Iz;fa82I0N5SB_6<6Q20WW2
@@ -26,7 +26,7 @@ Z8 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z9 !s108 1779837598.000000
+Z9 !s108 1779866119.000000
 Z10 !s107 A:/EE470/Mini-TPU/bf16_addition.sv|
 Z11 !s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/bf16_addition.sv|
 !i113 1
@@ -152,6 +152,30 @@ R25
 !i113 1
 R12
 R13
+vfp32_add
+R0
+R1
+!i10b 1
+!s100 m^`DIZlAH21d4o[zWNL0;0
+IAn`;9:QHMmXO2DB;7j9AU1
+R2
+!s105 fp32_add_sv_unit
+S1
+R4
+R21
+8A:/EE470/Mini-TPU/fp32_add.sv
+FA:/EE470/Mini-TPU/fp32_add.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+!s107 A:/EE470/Mini-TPU/fp32_add.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/fp32_add.sv|
+!i113 1
+R12
+R13
 vfp32_to_bf16
 R0
 R1
@@ -173,6 +197,126 @@ r1
 R9
 R24
 R25
+!i113 1
+R12
+R13
+vmem_interface
+R0
+Z26 !s110 1779866120
+!i10b 1
+!s100 Fz8BWZm^M^zVnW3N2n:oz0
+IZZ]5ZG:^:TWIZ=mQAGEOj2
+R2
+!s105 mem_interface_sv_unit
+S1
+R4
+w1779865098
+8A:/EE470/Mini-TPU/mem_interface.sv
+FA:/EE470/Mini-TPU/mem_interface.sv
+L0 17
+R8
+r1
+!s85 0
+31
+R9
+!s107 A:/EE470/Mini-TPU/mem_interface.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mem_interface.sv|
+!i113 1
+R12
+R13
+vmini_tpu_top
+R0
+R26
+!i10b 1
+!s100 EZVaa4SjHFVRPHdIgDRR`3
+IN[If<NODd`8lG?Y9KkEfZ0
+R2
+!s105 mini_tpu_top_sv_unit
+S1
+R4
+w1779864633
+8A:/EE470/Mini-TPU/mini_tpu_top.sv
+FA:/EE470/Mini-TPU/mini_tpu_top.sv
+L0 23
+R8
+r1
+!s85 0
+31
+Z27 !s108 1779866120.000000
+!s107 A:/EE470/Mini-TPU/mini_tpu_top.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mini_tpu_top.sv|
+!i113 1
+R12
+R13
+vprocessing_element
+R0
+R26
+!i10b 1
+!s100 n[33Y1Z45TeSfdPRdXg^23
+InRmW6eZYacNCA;J3ZhXoB1
+R2
+!s105 ProcessingElement_sv_unit
+S1
+R4
+w1779860943
+8A:/EE470/Mini-TPU/ProcessingElement.sv
+FA:/EE470/Mini-TPU/ProcessingElement.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R27
+!s107 A:/EE470/Mini-TPU/ProcessingElement.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/ProcessingElement.sv|
+!i113 1
+R12
+R13
+vsystolic_array
+R0
+R26
+!i10b 1
+!s100 FlG6ZWHbF?fP8Mhg;:2z@3
+I4R6P021lnJPQQ8B>n=56G0
+R2
+!s105 systolic_array_sv_unit
+S1
+R4
+w1779861178
+8A:/EE470/Mini-TPU/systolic_array.sv
+FA:/EE470/Mini-TPU/systolic_array.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R27
+!s107 A:/EE470/Mini-TPU/systolic_array.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/systolic_array.sv|
+!i113 1
+R12
+R13
+vtb_mini_tpu_top
+R0
+R26
+!i10b 1
+!s100 fToj=RBTmBekJSa`W5G;N2
+I^XDh64LaoZaa4Qdd>k4g^2
+R2
+!s105 mini_tpu_top_tb_sv_unit
+S1
+R4
+w1779865895
+8A:/EE470/Mini-TPU/mini_tpu_top_tb.sv
+FA:/EE470/Mini-TPU/mini_tpu_top_tb.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R27
+!s107 A:/EE470/Mini-TPU/mini_tpu_top_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|A:/EE470/Mini-TPU/mini_tpu_top_tb.sv|
 !i113 1
 R12
 R13
